@@ -4,10 +4,11 @@ import Image from "next/image";
 
 import Draggable from "react-draggable";
 
-import { useMainImg } from "@/states/main-img-state";
+import { useCanvasProperties, useMainImg } from "@/states/main-img-state";
 import { useImgPositing } from "@/states/position-state";
 
 import { getLocalStorage, setLocalStorage } from "@/lib/storage";
+import { cn } from "@/lib/utils";
 
 export const ImgCanvas = () => {
   const img = useMainImg((set) => set.img);
@@ -17,6 +18,8 @@ export const ImgCanvas = () => {
     set.imgS,
     set.setImgS,
   ]);
+
+  const cover = useCanvasProperties((set) => set.cover);
 
   useEffect(() => {
     const data = getLocalStorage("main-img-p");
@@ -47,7 +50,10 @@ export const ImgCanvas = () => {
         src={img}
         alt="main img"
         fill
-        className="object-cover object-center transition-none cursor-move"
+        className={cn(
+          "object-center transition-none cursor-move",
+          cover ? "object-cover" : "object-contain"
+        )}
         style={{
           scale: scale,
         }}

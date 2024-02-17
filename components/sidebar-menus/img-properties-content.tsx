@@ -42,15 +42,25 @@ export const ImgPropertyContent = () => {
     s.setColor,
   ]);
 
-  const [padding, round, shadow, setPadding, setRound, setShadow] =
-    useCanvasProperties((s) => [
-      s.padding,
-      s.round,
-      s.shadow,
-      s.setPadding,
-      s.setRound,
-      s.setShadow,
-    ]);
+  const [
+    cover,
+    padding,
+    round,
+    shadow,
+    setPadding,
+    setRound,
+    setShadow,
+    setCover,
+  ] = useCanvasProperties((s) => [
+    s.cover,
+    s.padding,
+    s.round,
+    s.shadow,
+    s.setPadding,
+    s.setRound,
+    s.setShadow,
+    s.setCover,
+  ]);
 
   useEffect(() => {
     const data = getLocalStorage("img-data");
@@ -63,6 +73,7 @@ export const ImgPropertyContent = () => {
       setPadding(dataObject.padding);
       setRound(dataObject.round);
       setShadow(dataObject.shadow);
+      setCover(dataObject.cover);
     }
     const data2 = getLocalStorage("main-img-p");
 
@@ -120,6 +131,7 @@ export const ImgPropertyContent = () => {
       padding: padding,
       round: round,
       shadow: shadow,
+      cover: cover,
     });
 
     setLocalStorage("img-data", data);
@@ -130,7 +142,18 @@ export const ImgPropertyContent = () => {
     });
 
     setLocalStorage("main-img-p", data2);
-  }, [img, width, height, bgColor, padding, round, shadow, position, scale]);
+  }, [
+    img,
+    width,
+    height,
+    bgColor,
+    padding,
+    round,
+    shadow,
+    position,
+    scale,
+    cover,
+  ]);
 
   return (
     <div className="w-full flex flex-col gap-y-8">
@@ -190,6 +213,25 @@ export const ImgPropertyContent = () => {
         >
           Tumb
         </Button>
+      </div>
+      <div className="w-full flex flex-col gap-y-2">
+        <p>Image Option:</p>
+        <div className="grid grid-cols-2 w-full gap-x-2">
+          <Button
+            variant={"outline"}
+            onClick={() => setCover(true)}
+            className="w-full"
+          >
+            Cover
+          </Button>{" "}
+          <Button
+            variant={"outline"}
+            onClick={() => setCover(false)}
+            className="w-full"
+          >
+            Full
+          </Button>
+        </div>
       </div>
       <PropertySlider
         max={1440}

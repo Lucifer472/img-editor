@@ -36,6 +36,8 @@ export const useCanvasSize = create<UseCanvasSizeTypes>((set) => ({
 }));
 
 interface UseCanvasPropertiesTypes {
+  cover: boolean;
+  setCover: (b: boolean) => void;
   padding: number;
   round: number;
   shadow: number;
@@ -45,6 +47,8 @@ interface UseCanvasPropertiesTypes {
 }
 
 export const useCanvasProperties = create<UseCanvasPropertiesTypes>((set) => ({
+  cover: false,
+  setCover: (b) => set({ cover: b }),
   padding: 0,
   round: 0,
   shadow: 0,
