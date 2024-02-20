@@ -47,7 +47,7 @@ export const DetailsCard = ({ isRight = false, img, bg }: DetailsCardProps) => {
           >
             <p>
               <span className={cn("text-lg", poppins.className)}>
-                Start quickly
+                Start quickly{" "}
               </span>
               with Bits, Blocks and Examples to help you move fast.
             </p>

@@ -30,11 +30,11 @@ export const Navbar = ({ templateName }: { templateName?: string }) => {
       quality: 1,
     }).then((dataUrl) => {
       const link = document.createElement("a");
-      link.download = "img-name.png";
+      link.download = `${templateName}.png`;
       link.href = dataUrl;
       link.click();
     });
-  }, [divRef]);
+  }, [divRef, templateName]);
 
   const handleReset = () => {
     setLocalStorage("bubble", "");

@@ -314,12 +314,12 @@ const Prop2 = () => {
           <div className="w-full flex flex-col items-start gap-y-2">
             <p>Select Embed:</p>
             <div className="grid grid-cols-3 w-full items-center justify-between gap-x-1 gap-y-2">
-              <Label htmlFor="img1">
+              <Label htmlFor="img-1">
                 <Input
                   type="radio"
                   className="hidden peer"
-                  name="img"
-                  id="img1"
+                  name="secondImg"
+                  id="img-1"
                   onChange={() => setImg("1.png")}
                   defaultChecked={img === "1.png"}
                 />
@@ -332,12 +332,12 @@ const Prop2 = () => {
                   />
                 </div>
               </Label>
-              <Label htmlFor="img2">
+              <Label htmlFor="img-2">
                 <Input
                   type="radio"
                   className="hidden peer"
-                  id="img2"
-                  name="img"
+                  id="img-2"
+                  name="secondImg"
                   onChange={() => setImg("2.png")}
                   defaultChecked={img === "2.png"}
                 />
@@ -350,12 +350,12 @@ const Prop2 = () => {
                   />
                 </div>
               </Label>
-              <Label htmlFor="img3">
+              <Label htmlFor="img-3">
                 <Input
                   type="radio"
                   className="hidden peer"
-                  id="img3"
-                  name="img"
+                  id="img-3"
+                  name="secondImg"
                   onChange={() => setImg("3.png")}
                   defaultChecked={img === "3.png"}
                 />
@@ -368,12 +368,12 @@ const Prop2 = () => {
                   />
                 </div>
               </Label>
-              <Label htmlFor="img4">
+              <Label htmlFor="img-4">
                 <Input
                   type="radio"
                   className="hidden peer"
-                  name="img"
-                  id="img4"
+                  name="secondImg"
+                  id="img-4"
                   onChange={() => setImg("4.png")}
                   defaultChecked={img === "4.png"}
                 />
@@ -386,12 +386,12 @@ const Prop2 = () => {
                   />
                 </div>
               </Label>
-              <Label htmlFor="img5">
+              <Label htmlFor="img-5">
                 <Input
                   type="radio"
                   className="hidden peer"
-                  id="img5"
-                  name="img"
+                  id="img-5"
+                  name="secondImg"
                   onChange={() => setImg("5.png")}
                   defaultChecked={img === "5.png"}
                 />
@@ -404,12 +404,12 @@ const Prop2 = () => {
                   />
                 </div>
               </Label>
-              <Label htmlFor="img6">
+              <Label htmlFor="img-6">
                 <Input
                   type="radio"
                   className="hidden peer"
-                  id="img6"
-                  name="img"
+                  id="img-6"
+                  name="secondImg"
                   onChange={() => setImg("6.png")}
                   defaultChecked={img === "6.png"}
                 />

@@ -1,7 +1,5 @@
-"use client";
-
 export const setLocalStorage = (label: string, data: string) => {
-  localStorage.setItem(label, data);
+  return localStorage.setItem(label, data);
 };
 
 export const getLocalStorage = (label: string) => {

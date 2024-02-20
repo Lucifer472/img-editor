@@ -28,23 +28,23 @@ const HomePage = () => {
           <div className="absolute bg-[url('/home-bg.png')] bg-contain opacity-35 bg-no-repeat bg-center w-full h-full z-0"></div>
           <div className="flex flex-col items-center justify-center z-20 w-full h-full relative">
             <div className="flex flex-col items-center justify-center gap-y-4 bg-white p-6 rounded-xl bg-opacity-90">
-              <h1 className={cn("text-5xl text-center", poppins.className)}>
+              <h1 className={cn("text-2xl text-center", poppins.className)}>
                 Create Custom Facebook Post, 10x Faster
               </h1>
-              <p className="text-center text-muted-foreground text-xl max-w-[600px]">
+              <p className="text-center text-muted-foreground text-lg max-w-[600px]">
                 Create stunning images with our easy-to-use image editor.
                 Perfect for social media posts, blog images, and more.
               </p>
               <div className="flex items-center justify-center gap-x-4 mt-8">
                 <Link
                   href={"/editor"}
-                  className="w-[200px] h-[50px] flex items-center justify-center bg-sky-500 hover:bg-sky-600 text-white text-xl rounded-md shadow-md hover:shadow-none"
+                  className="w-[200px] h-[50px] flex items-center justify-center bg-sky-500 hover:bg-sky-600 text-white rounded-md shadow-md hover:shadow-none"
                 >
                   Get Started Now
                 </Link>
                 <Link
                   href={"/contact-us"}
-                  className="w-[200px] h-[50px] flex items-center justify-center bg-blue-500 hover:bg-blue-600 text-white text-xl rounded-md shadow-md hover:shadow-none"
+                  className="w-[200px] h-[50px] flex items-center justify-center bg-blue-500 hover:bg-blue-600 text-white rounded-md shadow-md hover:shadow-none"
                 >
                   Contact Us
                 </Link>
@@ -52,8 +52,9 @@ const HomePage = () => {
             </div>
           </div>
         </div>
-        <DetailsCard img="/home.png" bg />
-        <DetailsCard img="/home.png" isRight />
+        <DetailsCard img="/templates/square.png" bg />
+        <DetailsCard img="/templates/story.png" isRight />
+        <DetailsCard img="/templates/tumb.png" bg />
       </section>
       <Footer />
     </div>
