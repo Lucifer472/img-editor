@@ -3,7 +3,6 @@ import { useEffect, useMemo, useState } from "react";
 import { toast } from "react-hot-toast";
 
 import { Label } from "@/components/ui/label";
-import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
 
 import { PropertySlider } from "@/components/sidebar-menus/property-slider";
@@ -18,6 +17,8 @@ import {
 import { useImgPositing } from "@/states/position-state";
 
 import { getLocalStorage, setLocalStorage } from "@/lib/storage";
+import { ColorCard } from "./color-card";
+import { Separator } from "../ui/separator";
 
 export const ImgPropertyContent = () => {
   const [isPending, setPending] = useState(false);
@@ -51,6 +52,8 @@ export const ImgPropertyContent = () => {
     setRound,
     setShadow,
     setCover,
+    shadowColor,
+    setShadowColor,
   ] = useCanvasProperties((s) => [
     s.cover,
     s.padding,
@@ -60,10 +63,12 @@ export const ImgPropertyContent = () => {
     s.setRound,
     s.setShadow,
     s.setCover,
+    s.color,
+    s.setColor,
   ]);
 
   useEffect(() => {
-    const data = getLocalStorage("img-data");
+    const data = getLocalStorage("imgData");
     if (data) {
       const dataObject = JSON.parse(data);
       setBgColor(dataObject.bgColor);
@@ -74,13 +79,9 @@ export const ImgPropertyContent = () => {
       setRound(dataObject.round);
       setShadow(dataObject.shadow);
       setCover(dataObject.cover);
-    }
-    const data2 = getLocalStorage("main-img-p");
-
-    if (data2) {
-      const objectData = JSON.parse(data2);
-      setPosition(objectData.pos);
-      setScale(objectData.scale);
+      setShadowColor(dataObject.shadowColor);
+      setPosition(dataObject.pos);
+      setScale(dataObject.scale);
     }
   }, []);
 
@@ -132,16 +133,12 @@ export const ImgPropertyContent = () => {
       round: round,
       shadow: shadow,
       cover: cover,
-    });
-
-    setLocalStorage("img-data", data);
-
-    const data2 = JSON.stringify({
+      shadowColor: shadowColor,
       pos: position,
       scale: scale,
     });
 
-    setLocalStorage("main-img-p", data2);
+    setLocalStorage("imgData", data);
   }, [
     img,
     width,
@@ -153,6 +150,7 @@ export const ImgPropertyContent = () => {
     position,
     scale,
     cover,
+    shadowColor,
   ]);
 
   return (
@@ -171,20 +169,11 @@ export const ImgPropertyContent = () => {
       >
         Click Here to Upload Img
       </Label>
-      <div className="flex items-center justify-between w-full">
-        <div className="flex flex-col items-start">
-          <span className="text-sm font-medium">Card Background</span>
-          <span className="text-sm text-muted-foreground">{bgColor}</span>
-        </div>
-        <Input
-          type="color"
-          value={bgColor}
-          onChange={(e) => setBgColor(e.target.value)}
-          className="rounded-full p-0 border-4 h-10 w-10 bg-white cursor-pointer disabled:pointer-events-none ring-offset-background [&::-webkit-color-swatch]:rounded-full
-        [&::-moz-color-swatch]:rounded-full [&::-webkit-color-swatch]:border-0
-        [&::-moz-color-swatch]:border-0 [&::-webkit-color-swatch-wrapper]:p-0"
-        />
-      </div>
+      <ColorCard
+        color={bgColor}
+        label="Card Background"
+        setColor={setBgColor}
+      />
       <div className="flex items-center justify-between w-full gap-2 flex-wrap ">
         <Button
           variant={"outline"}
@@ -282,6 +271,12 @@ export const ImgPropertyContent = () => {
         label="Roundness"
         setValue={setRound}
         value={round}
+      />
+      <Separator />
+      <ColorCard
+        color={shadowColor}
+        setColor={setShadowColor}
+        label="Shadow Color"
       />
       <PropertySlider
         max={100}

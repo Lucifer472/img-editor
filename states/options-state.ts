@@ -13,6 +13,8 @@ interface useOptionsType {
   setImgP: (o: { x: number; y: number }) => void;
   setImgS: (v: number) => void;
   setImgR: (v: number) => void;
+  color: string;
+  setColor: (s: string) => void;
 }
 
 export const usePropsState1 = create<useOptionsType>((set) => ({
@@ -26,6 +28,8 @@ export const usePropsState1 = create<useOptionsType>((set) => ({
   setImgP: (o) => set({ imgP: o }),
   setImgS: (v) => set({ imgS: v }),
   setImgR: (v) => set({ imgR: v }),
+  color: "#000000",
+  setColor: (s) => set({ color: s }),
 }));
 
 export const usePropsState2 = create<useOptionsType>((set) => ({
@@ -39,4 +43,6 @@ export const usePropsState2 = create<useOptionsType>((set) => ({
   setImgP: (o) => set({ imgP: o }),
   setImgS: (v) => set({ imgS: v }),
   setImgR: (v) => set({ imgR: v }),
+  color: "#000000",
+  setColor: (s) => set({ color: s }),
 }));

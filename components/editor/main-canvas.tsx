@@ -19,14 +19,17 @@ import {
 import { ImgCanvas } from "@/components/editor/img-canvas";
 import { BubbleCanvas } from "@/components/editor/bubble-canvas";
 
-export const MainCanvas = () => {
+import { hexToRgb } from "@/lib/color-change";
+
+const MainCanvas = () => {
   const scale = useZoomDialer((set) => set.level);
   const bgColor = useCanvasBackColor((set) => set.color);
   const [width, height] = useCanvasSize((set) => [set.width, set.height]);
-  const [padding, round, shadow] = useCanvasProperties((set) => [
+  const [padding, round, shadow, color] = useCanvasProperties((set) => [
     set.padding,
     set.round,
     set.shadow,
+    set.color,
   ]);
   const setDiv = useDivState((set) => set.setDiv);
 
@@ -36,6 +39,8 @@ export const MainCanvas = () => {
       setDiv(divRef as any);
     }
   }, [divRef, setDiv]);
+
+  const shadowColorArray = hexToRgb(color);
 
   return (
     <>
@@ -58,7 +63,15 @@ export const MainCanvas = () => {
               className="relative bg-pink-300 overflow-hidden w-full h-full"
               style={{
                 borderRadius: `${round}%`,
-                boxShadow: `0px 0px 15px 5px rgba(0,0,0,${shadow / 100})`,
+                boxShadow: `0px 0px 15px ${shadow / 2}px rgba(${
+                  shadowColorArray
+                    ? shadowColorArray[0] +
+                      "," +
+                      shadowColorArray[1] +
+                      "," +
+                      shadowColorArray[2]
+                    : "0,0,0"
+                },${shadow / 100})`,
               }}
             >
               <BubbleCanvas />
@@ -75,3 +88,4 @@ export const MainCanvas = () => {
     </>
   );
 };
+export default MainCanvas;

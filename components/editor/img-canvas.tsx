@@ -7,7 +7,6 @@ import Draggable from "react-draggable";
 import { useCanvasProperties, useMainImg } from "@/states/main-img-state";
 import { useImgPositing } from "@/states/position-state";
 
-import { getLocalStorage, setLocalStorage } from "@/lib/storage";
 import { cn } from "@/lib/utils";
 
 export const ImgCanvas = () => {
@@ -21,28 +20,9 @@ export const ImgCanvas = () => {
 
   const cover = useCanvasProperties((set) => set.cover);
 
-  useEffect(() => {
-    const data = getLocalStorage("main-img-p");
-
-    if (data) {
-      const objectData = JSON.parse(data);
-      setPosition(objectData.pos);
-      setScale(objectData.scale);
-    }
-  }, []);
-
   const handleDrag = (e: any, ui: any) => {
     setPosition({ x: position.x + ui.deltaX, y: position.y + ui.deltaY });
   };
-
-  useEffect(() => {
-    const data = JSON.stringify({
-      pos: position,
-      scale: scale,
-    });
-
-    setLocalStorage("main-img-p", data);
-  }, [position, scale]);
 
   return (
     <Draggable position={position} onDrag={handleDrag}>

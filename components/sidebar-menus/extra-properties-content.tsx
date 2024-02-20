@@ -1,4 +1,5 @@
 "use client";
+import { useEffect } from "react";
 import Image from "next/image";
 
 import { Switch } from "@/components/ui/switch";
@@ -6,9 +7,9 @@ import { Label } from "@/components/ui/label";
 import { Input } from "@/components/ui/input";
 import { Separator } from "@/components/ui/separator";
 import { PropertySlider } from "@/components/sidebar-menus/property-slider";
+import { ColorCard } from "@/components/sidebar-menus/color-card";
 
 import { usePropsState1, usePropsState2 } from "@/states/options-state";
-import { useEffect } from "react";
 import { getLocalStorage, setLocalStorage } from "@/lib/storage";
 
 const Prop1 = () => {
@@ -23,6 +24,8 @@ const Prop1 = () => {
     setPosition,
     setRotation,
     setScale,
+    color,
+    setColor,
   ] = usePropsState1((set) => [
     set.prop,
     set.setProp,
@@ -34,10 +37,12 @@ const Prop1 = () => {
     set.setImgP,
     set.setImgR,
     set.setImgS,
+    set.color,
+    set.setColor,
   ]);
 
   useEffect(() => {
-    const data = getLocalStorage("opt-1");
+    const data = getLocalStorage("opt1");
 
     if (data) {
       const dataObject = JSON.parse(data);
@@ -48,6 +53,7 @@ const Prop1 = () => {
       setPosition(dataObject.position);
       setRotation(dataObject.rotation);
       setScale(dataObject.scale);
+      setColor(dataObject.color);
     }
   }, []);
 
@@ -65,10 +71,11 @@ const Prop1 = () => {
       position,
       rotation,
       scale,
+      color,
     });
 
-    setLocalStorage("opt-1", data);
-  }, [prop, img, position, rotation, scale]);
+    setLocalStorage("opt1", data);
+  }, [prop, img, position, rotation, scale, color]);
 
   return (
     <>
@@ -191,6 +198,7 @@ const Prop1 = () => {
               </Label>
             </div>
           </div>
+          <ColorCard label="Image Color" color={color} setColor={setColor} />
           <Separator className="w-full" />
           <PropertySlider
             max={2500}
@@ -242,6 +250,8 @@ const Prop2 = () => {
     setPosition,
     setRotation,
     setScale,
+    color,
+    setColor,
   ] = usePropsState2((set) => [
     set.prop,
     set.setProp,
@@ -253,10 +263,12 @@ const Prop2 = () => {
     set.setImgP,
     set.setImgR,
     set.setImgS,
+    set.color,
+    set.setColor,
   ]);
 
   useEffect(() => {
-    const data = getLocalStorage("opt-2");
+    const data = getLocalStorage("opt2");
 
     if (data) {
       const dataObject = JSON.parse(data);
@@ -267,6 +279,7 @@ const Prop2 = () => {
       setPosition(dataObject.position);
       setRotation(dataObject.rotation);
       setScale(dataObject.scale);
+      setColor(dataObject.color);
     }
   }, []);
 
@@ -284,10 +297,11 @@ const Prop2 = () => {
       position,
       rotation,
       scale,
+      color,
     });
 
-    setLocalStorage("opt-2", data);
-  }, [prop, img, position, rotation, scale]);
+    setLocalStorage("opt2", data);
+  }, [prop, img, position, rotation, scale, color]);
 
   return (
     <>
@@ -410,6 +424,7 @@ const Prop2 = () => {
               </Label>
             </div>
           </div>
+          <ColorCard label="Image Color" color={color} setColor={setColor} />
           <Separator className="w-full" />
           <PropertySlider
             max={2500}

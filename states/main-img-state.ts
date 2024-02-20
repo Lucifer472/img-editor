@@ -44,6 +44,8 @@ interface UseCanvasPropertiesTypes {
   setPadding: (v: number) => void;
   setRound: (v: number) => void;
   setShadow: (v: number) => void;
+  color: string;
+  setColor: (s: string) => void;
 }
 
 export const useCanvasProperties = create<UseCanvasPropertiesTypes>((set) => ({
@@ -55,4 +57,6 @@ export const useCanvasProperties = create<UseCanvasPropertiesTypes>((set) => ({
   setPadding: (v: number) => set({ padding: v }),
   setRound: (v: number) => set({ round: v }),
   setShadow: (v: number) => set({ shadow: v }),
+  color: "#000000",
+  setColor: (s) => set({ color: s }),
 }));

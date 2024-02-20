@@ -4,10 +4,11 @@ import Image from "next/image";
 
 import { useOverlayStates } from "@/states/overlay-state";
 import { useTextStates } from "@/states/text-state";
-
-import { cn } from "@/lib/utils";
 import { useWatermark } from "@/states/watermark-state";
 import { usePropsState1, usePropsState2 } from "@/states/options-state";
+
+import { manipulateColor } from "@/lib/color-change";
+import { cn } from "@/lib/utils";
 
 // Fonts
 const poppins = Poppins({
@@ -161,13 +162,16 @@ export const WaterMarkCanvas = () => {
 };
 
 export const Options1Canvas = () => {
-  const [img, scale, rotate, positing, prop] = usePropsState1((set) => [
+  const [img, scale, rotate, positing, prop, color] = usePropsState1((set) => [
     set.img,
     set.imgS,
     set.imgR,
     set.imgP,
     set.prop,
+    set.color,
   ]);
+
+  const filter = manipulateColor(color).filter;
 
   return (
     <div className={prop ? "absolute" : "hidden"}>
@@ -181,6 +185,7 @@ export const Options1Canvas = () => {
           scale: scale,
           rotate: `${rotate}deg`,
           transform: `translate(${positing.x}px,${positing.y}px)`,
+          filter: filter,
         }}
       />
     </div>
@@ -188,13 +193,15 @@ export const Options1Canvas = () => {
 };
 
 export const Options2Canvas = () => {
-  const [img, scale, rotate, positing, prop] = usePropsState2((set) => [
+  const [img, scale, rotate, positing, prop, color] = usePropsState2((set) => [
     set.img,
     set.imgS,
     set.imgR,
     set.imgP,
     set.prop,
+    set.color,
   ]);
+  const filter = manipulateColor(color).filter;
 
   return (
     <div className={prop ? "absolute" : "hidden"}>
@@ -208,6 +215,7 @@ export const Options2Canvas = () => {
           scale: scale,
           rotate: `${rotate}deg`,
           transform: `translate(${positing.x}px,${positing.y}px)`,
+          filter: filter,
         }}
       />
     </div>

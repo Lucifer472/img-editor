@@ -62,13 +62,7 @@ export const BubblePropertiesContent = () => {
       setBorderWidth(dataObject.borderWidth);
       setBorderColor(dataObject.borderColor);
       setImg(dataObject.img);
-    }
-
-    const data2 = getLocalStorage("main-img-b");
-
-    if (data2) {
-      const objectData = JSON.parse(data2);
-      setPosition(objectData.pos);
+      setPosition(dataObject.pos);
     }
   }, []);
 
@@ -118,15 +112,10 @@ export const BubblePropertiesContent = () => {
       borderWidth: borderWidth,
       borderColor: borderColor,
       img: img,
-    });
-
-    setLocalStorage("bubble", data);
-
-    const data2 = JSON.stringify({
       pos: position,
     });
 
-    setLocalStorage("main-img-b", data2);
+    setLocalStorage("bubble", data);
   }, [visible, size, roundness, borderWidth, borderColor, img, position]);
 
   return (

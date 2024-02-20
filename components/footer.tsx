@@ -11,7 +11,7 @@ const poppins = Poppins({
 
 const Footer = () => {
   return (
-    <footer className="w-full h-40 flex flex-col items-center justify-center gap-y-4 bg-white">
+    <footer className="w-full h-40 flex flex-col items-center justify-center gap-y-4 bg-white border-t-2 border-border">
       <div className="flex items-center justify-center gap-x-4">
         <Button variant={"link"} asChild>
           <Link href={"/"}>Terms & Condition</Link>

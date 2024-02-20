@@ -1,12 +1,10 @@
 "use client";
-import { useEffect } from "react";
 import Draggable from "react-draggable";
 import Image from "next/image";
 
 import { useBubbleState } from "@/states/bubble-state";
 import { useImgPositing } from "@/states/position-state";
 
-import { getLocalStorage, setLocalStorage } from "@/lib/storage";
 import { cn } from "@/lib/utils";
 
 export const BubbleCanvas = () => {
@@ -24,15 +22,6 @@ export const BubbleCanvas = () => {
     set.setBubbleP,
   ]);
 
-  useEffect(() => {
-    const data = getLocalStorage("main-img-b");
-
-    if (data) {
-      const objectData = JSON.parse(data);
-      setPosition(objectData.pos);
-    }
-  }, []);
-
   const handleDrag = (e: any, ui: any) => {
     setPosition({
       x: position.x + ui.deltaX,
@@ -40,19 +29,11 @@ export const BubbleCanvas = () => {
     });
   };
 
-  useEffect(() => {
-    const data = JSON.stringify({
-      pos: position,
-    });
-
-    setLocalStorage("main-img-b", data);
-  }, [position]);
-
   return (
     <Draggable position={position} onDrag={handleDrag}>
       <div
         className={cn(
-          "z-50 top-0 left-0 overflow-hidden cursor-move",
+          "z-10 top-0 left-0 overflow-hidden cursor-move",
           visible ? "relative" : "hidden"
         )}
         style={{
