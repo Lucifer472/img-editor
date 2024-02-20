@@ -22,8 +22,7 @@ export const createProjectByTemplate = async (
   const dataTemplate = await createTemplate(name);
 
   if (dataTemplate.error) {
-    // @ts-ignore
-    return { error: dataTemplate.error.error };
+    return { error: dataTemplate.error };
   }
 
   const res = await saveTemplate(

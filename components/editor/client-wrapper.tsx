@@ -21,6 +21,7 @@ const ClientWrapper = ({ children, projectData }: ClientWrapperProps) => {
     setLocalStorage("overlay", projectData.overlay as string);
     setLocalStorage("text", projectData.text as string);
     setLocalStorage("watermark", projectData.watermark as string);
+    setLocalStorage("projectId", projectData.id);
 
     setRender(true);
   }, []);

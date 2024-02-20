@@ -75,6 +75,6 @@ export const createTemplate = async (name: string) => {
 
     return { success: data };
   } catch (error) {
-    return { error: error };
+    return { error: "something went wrong!" };
   }
 };
