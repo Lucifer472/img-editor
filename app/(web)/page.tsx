@@ -1,15 +1,13 @@
 import { Poppins } from "next/font/google";
 import Link from "next/link";
 
-import { Button } from "@/components/ui/button";
-
-import Logo from "@/components/logo";
-import { DetailsCard } from "@/components/home/details-card";
 import Footer from "@/components/footer";
+import { HomeNavbar } from "@/components/navigation/home-navbar";
+import { Reviews } from "@/components/etc/reviews";
+import { DetailsCard } from "@/components/home/details-card";
 import { Card1, Card2, Card3 } from "@/components/etc/home-page";
 
 import { cn } from "@/lib/utils";
-import { Reviews } from "@/components/etc/reviews";
 
 const poppins = Poppins({
   subsets: ["latin"],
@@ -19,13 +17,7 @@ const poppins = Poppins({
 const HomePage = () => {
   return (
     <div className="w-full bg-slate-100">
-      <nav className="w-full h-20 flex items-center justify-between px-4 bg-white border-border border-b-2">
-        <Logo />
-        <div className="flex items-center justify-end gap-x-2">
-          <Button variant={"outline"}>Login</Button>
-          <Button variant={"outline"}>Contact Us</Button>
-        </div>
-      </nav>
+      <HomeNavbar />
       <section className="flex flex-col items-center justify-center w-full gap-y-4">
         <div className="w-full h-[800px] relative">
           <div className="absolute bg-[url('/home-bg.png')] bg-contain opacity-35 bg-no-repeat bg-center w-full h-full z-0"></div>
@@ -46,10 +38,10 @@ const HomePage = () => {
                   Get Started Now
                 </Link>
                 <Link
-                  href={"/contact-us"}
+                  href={"/explore"}
                   className="w-[200px] h-[50px] flex items-center justify-center bg-blue-500 hover:bg-blue-600 text-white rounded-md shadow-md hover:shadow-none"
                 >
-                  Contact Us
+                  Explore Project
                 </Link>
               </div>
             </div>

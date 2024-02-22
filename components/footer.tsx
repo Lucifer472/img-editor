@@ -14,16 +14,16 @@ const Footer = () => {
     <footer className="w-full h-40 flex flex-col items-center justify-center gap-y-4 bg-white border-t-2 border-border">
       <div className="flex items-center justify-center gap-x-4">
         <Button variant={"link"} asChild>
-          <Link href={"/"}>Terms & Condition</Link>
+          <Link href={"/terms"}>Terms & Condition</Link>
         </Button>
         <Button variant={"link"} asChild>
-          <Link href={"/"}>Privacy Policy</Link>
+          <Link href={"/policy"}>Privacy Policy</Link>
         </Button>
         <Button variant={"link"} asChild>
-          <Link href={"/"}>Contact Us</Link>
+          <Link href={"/contact-us"}>Contact Us</Link>
         </Button>
         <Button variant={"link"} asChild>
-          <Link href={"/"}>Pricing</Link>
+          <Link href={"/pricing"}>Pricing</Link>
         </Button>
       </div>
       <p className={cn("text-sm text-center leading-6", poppins.className)}>
