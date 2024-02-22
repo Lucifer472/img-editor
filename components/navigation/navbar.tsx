@@ -1,5 +1,5 @@
 "use client";
-import { useCallback, useTransition } from "react";
+import { useCallback, useState, useTransition } from "react";
 import toast from "react-hot-toast";
 import { toPng } from "html-to-image";
 import { CopyIcon, DownloadIcon } from "@radix-ui/react-icons";
@@ -23,11 +23,16 @@ export const Navbar = ({ templateName }: { templateName?: string }) => {
     if (divRef.current === null) {
       return;
     }
+    const rect = divRef.current.getBoundingClientRect();
+
+    console.log(rect);
 
     toPng(divRef.current, {
       cacheBust: false,
       includeQueryParams: true,
-      quality: 1,
+      quality: 0.2,
+      canvasWidth: rect.width,
+      canvasHeight: rect.height,
     }).then((dataUrl) => {
       const link = document.createElement("a");
       link.download = `${templateName}.png`;
@@ -48,37 +53,64 @@ export const Navbar = ({ templateName }: { templateName?: string }) => {
     window.location.reload();
   };
 
-  const handleSave = () => {
-    const bubble = getLocalStorage("bubble");
-    const imgData = getLocalStorage("imgData");
-    const opt1 = getLocalStorage("opt1");
-    const opt2 = getLocalStorage("opt2");
-    const overlay = getLocalStorage("overlay");
-    const text = getLocalStorage("text");
-    const watermark = getLocalStorage("watermark");
+  const handleSave = useCallback(() => {
+    if (!divRef || divRef.current === null) {
+      return toast.error("Something Went Wrong");
+    }
+    const rect = divRef.current.getBoundingClientRect();
 
     startTransition(() => {
-      if (templateName) {
-        updateTemplate(
-          templateName,
-          // "default",
-          bubble as string,
-          imgData as string,
-          opt1 as string,
-          opt2 as string,
-          overlay as string,
-          text as string,
-          watermark as string
-        ).then((res) => {
-          if (res) {
-            toast.success("Saved Successfully");
+      toPng(divRef.current, {
+        cacheBust: false,
+        includeQueryParams: true,
+        quality: 0.5,
+        canvasWidth: rect.width / 2,
+        canvasHeight: rect.height / 2,
+      }).then((dataUrl) => {
+        fetch("https://img.missiongujarat.in/api/upload/buffer", {
+          method: "POST",
+          body: JSON.stringify({
+            img: dataUrl,
+            name: templateName,
+          }),
+        }).then((res) => {
+          if (res.status === 200) {
+            res.text().then((res) => {
+              const bubble = getLocalStorage("bubble");
+              const imgData = getLocalStorage("imgData");
+              const opt1 = getLocalStorage("opt1");
+              const opt2 = getLocalStorage("opt2");
+              const overlay = getLocalStorage("overlay");
+              const text = getLocalStorage("text");
+              const watermark = getLocalStorage("watermark");
+              if (templateName) {
+                updateTemplate(
+                  templateName,
+                  // "default",
+                  bubble as string,
+                  imgData as string,
+                  opt1 as string,
+                  opt2 as string,
+                  overlay as string,
+                  text as string,
+                  watermark as string,
+                  res as string
+                ).then((res) => {
+                  if (res) {
+                    toast.success("Saved Successfully");
+                  } else {
+                    toast.error("Failed to save the document");
+                  }
+                });
+              }
+            });
           } else {
-            toast.error("Failed to save the document");
+            toast.error("something went wrong");
           }
         });
-      }
+      });
     });
-  };
+  }, [divRef, templateName]);
 
   return (
     <nav className="w-full max-h-20 py-2 px-8 border-b border-border flex items-center justify-between">

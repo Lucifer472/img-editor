@@ -33,7 +33,9 @@ const Footer = () => {
           className="inline-block px-1 underline"
           asChild
         >
-          <Link href={"/"}> True Pub Media </Link>
+          <Link href={"https://truepubmedia.com"} target="_blank">
+            True Pub Media{" "}
+          </Link>
         </Button>
         Private Limited.
       </p>

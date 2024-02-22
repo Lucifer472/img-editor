@@ -5,12 +5,18 @@ import { Navbar } from "@/components/navigation/navbar";
 import { fetchTemplate } from "@/lib/template";
 import { Sidebar } from "@/components/sidebar-menus/sidebar";
 
+const templates = ["tumb", "story", "default", "square"];
+
 const TemplatePage = async ({ params }: { params: { name: string } }) => {
   const projectName = decodeURIComponent(params.name);
 
   const project = await fetchTemplate(projectName);
 
   if (!project) {
+    return redirect("/");
+  }
+
+  if (templates.includes(projectName)) {
     return redirect("/");
   }
 

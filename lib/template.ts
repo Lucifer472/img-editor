@@ -40,7 +40,8 @@ export const saveTemplate = async (
   opt2: string,
   overlay: string,
   text: string,
-  watermark: string
+  watermark: string,
+  preview?: string
 ) => {
   try {
     await db.template.update({
@@ -55,6 +56,7 @@ export const saveTemplate = async (
         overlay,
         text,
         watermark,
+        preview: preview ? preview : "/bubble-placeholder.png",
       },
     });
 
@@ -76,5 +78,26 @@ export const createTemplate = async (name: string) => {
     return { success: data };
   } catch (error) {
     return { error: "something went wrong!" };
+  }
+};
+
+export const fetchAllTemplates = async () => {
+  try {
+    const data = await db.template.findMany({
+      take: 100,
+      where: {
+        NOT: {
+          name: {
+            in: ["story", "tumb", "default", "square"],
+          },
+        },
+      },
+    });
+
+    if (!data) return null;
+
+    return data;
+  } catch (error) {
+    return null;
   }
 };

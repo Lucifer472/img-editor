@@ -1,12 +1,15 @@
 import { Poppins } from "next/font/google";
 import Link from "next/link";
 
-import Logo from "@/components/logo";
 import { Button } from "@/components/ui/button";
+
+import Logo from "@/components/logo";
 import { DetailsCard } from "@/components/home/details-card";
+import Footer from "@/components/footer";
+import { Card1, Card2, Card3 } from "@/components/etc/home-page";
 
 import { cn } from "@/lib/utils";
-import Footer from "@/components/footer";
+import { Reviews } from "@/components/etc/reviews";
 
 const poppins = Poppins({
   subsets: ["latin"],
@@ -52,9 +55,16 @@ const HomePage = () => {
             </div>
           </div>
         </div>
-        <DetailsCard img="/templates/square.png" bg />
-        <DetailsCard img="/templates/story.png" isRight />
-        <DetailsCard img="/templates/tumb.png" bg />
+        <DetailsCard img="/templates/square.png" bg>
+          <Card1 />
+        </DetailsCard>
+        <DetailsCard img="/templates/story.png" isRight>
+          <Card2 isRight={true} />
+        </DetailsCard>
+        <DetailsCard img="/templates/tumb.png" bg>
+          <Card3 />
+        </DetailsCard>
+        <Reviews />
       </section>
       <Footer />
     </div>

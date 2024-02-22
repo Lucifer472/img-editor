@@ -51,7 +51,8 @@ export const updateTemplate = async (
   opt2: string | null,
   overlay: string | null,
   text: string | null,
-  watermark: string | null
+  watermark: string | null,
+  preview?: string | null
 ) => {
   if (
     name &&
@@ -61,7 +62,8 @@ export const updateTemplate = async (
     opt2 &&
     overlay &&
     text &&
-    watermark
+    watermark &&
+    preview
   ) {
     const res = await saveTemplate(
       name,
@@ -71,7 +73,8 @@ export const updateTemplate = async (
       opt2 as string,
       overlay as string,
       text as string,
-      watermark as string
+      watermark as string,
+      preview as string
     );
 
     return res;

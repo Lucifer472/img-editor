@@ -20,4 +20,5 @@ model Template{
   overlay Json? 
   text    Json? 
   watermark Json? 
+  preview   String  @default("/bubble-placeholder.png")
 }
