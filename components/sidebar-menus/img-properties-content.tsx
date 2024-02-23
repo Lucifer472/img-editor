@@ -2,11 +2,13 @@
 import { useEffect, useMemo, useState } from "react";
 import { toast } from "react-hot-toast";
 
-import { Label } from "@/components/ui/label";
 import { Button } from "@/components/ui/button";
+import { Separator } from "@/components/ui/separator";
+import Loader from "@/components/loader";
 
 import { PropertySlider } from "@/components/sidebar-menus/property-slider";
-import Loader from "@/components/loader";
+import { ColorCard } from "@/components/sidebar-menus/color-card";
+import { ImgUploadBtn } from "@/components/sidebar-menus/img-upload-btn";
 
 import {
   useCanvasBackColor,
@@ -17,8 +19,6 @@ import {
 import { useImgPositing } from "@/states/position-state";
 
 import { getLocalStorage, setLocalStorage } from "@/lib/storage";
-import { ColorCard } from "./color-card";
-import { Separator } from "../ui/separator";
 
 export const ImgPropertyContent = () => {
   const [isPending, setPending] = useState(false);
@@ -154,26 +154,20 @@ export const ImgPropertyContent = () => {
   ]);
 
   return (
-    <div className="w-full flex flex-col gap-y-8">
+    <div className="w-full flex flex-col gap-y-4">
       <Loader isOpen={isPending} />
-      <input
-        type="file"
-        accept="image/*"
-        className="hidden"
+      <ImgUploadBtn
         id="main-img"
-        onChange={(e: any) => setFile(e.target.files?.[0])}
+        isPending={isPending}
+        label="Click here to upload main Image"
+        setFile={setFile}
       />
-      <Label
-        htmlFor="main-img"
-        className="w-full min-h-32 bg-sky-100 cursor-pointer flex items-center justify-center text-muted-foreground rounded-md border-2 border-dashed border-sky-300"
-      >
-        Click Here to Upload Img
-      </Label>
       <ColorCard
         color={bgColor}
         label="Card Background"
         setColor={setBgColor}
       />
+      <Separator className="w-full" />
       <div className="flex items-center justify-between w-full gap-2 flex-wrap ">
         <Button
           variant={"outline"}
@@ -203,6 +197,7 @@ export const ImgPropertyContent = () => {
           Tumb
         </Button>
       </div>
+      <Separator className="w-full" />
       <div className="w-full flex flex-col gap-y-2">
         <p>Image Option:</p>
         <div className="grid grid-cols-2 w-full gap-x-2">
@@ -222,6 +217,7 @@ export const ImgPropertyContent = () => {
           </Button>
         </div>
       </div>
+      <Separator className="w-full" />
       <PropertySlider
         max={1440}
         label="Width"

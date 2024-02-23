@@ -1,5 +1,4 @@
 "use client";
-import { Poppins, Inter, Roboto } from "next/font/google";
 import Image from "next/image";
 
 import { useOverlayStates } from "@/states/overlay-state";
@@ -9,20 +8,6 @@ import { usePropsState1, usePropsState2 } from "@/states/options-state";
 
 import { manipulateColor } from "@/lib/color-change";
 import { cn } from "@/lib/utils";
-
-// Fonts
-const poppins = Poppins({
-  subsets: ["latin"],
-  weight: ["300", "500", "700", "900"],
-});
-const inter = Inter({
-  subsets: ["latin"],
-  weight: ["300", "500", "700", "900"],
-});
-const roboto = Roboto({
-  subsets: ["latin"],
-  weight: ["300", "500", "700", "900"],
-});
 
 export const OverlayCanvas = () => {
   const [visible, solid, bgColor, height] = useOverlayStates((set) => [
@@ -74,24 +59,22 @@ export const TextCanvas = () => {
   const weight = ["lighter", "normal", "bold", "bolder"];
 
   return (
-    <div
+    <p
       className={cn(
         "text-white z-50 whitespace-pre-line bottom-10 inset-x-16",
-        visible ? "absolute" : "hidden",
-        parseInt(fontFamily as any) === 0 && poppins.className,
-        parseInt(fontFamily as any) === 1 && inter.className,
-        parseInt(fontFamily as any) === 1 && roboto.className
+        visible ? "absolute" : "hidden"
       )}
       style={{
-        transform: `translateY(-${top}px)`,
+        transform: `translateY(${-top}px)`,
         textAlign: align[parseInt(textAlign as any)] as any,
         fontWeight: weight[parseInt(textWeight as any)] as any,
         fontSize: `${fontSize}px`,
         letterSpacing: `${spacing}rem`,
         lineHeight: `${line * 10}px`,
+        fontFamily: `${fontFamily},sans-serif`,
       }}
       dangerouslySetInnerHTML={{ __html: text }}
-    ></div>
+    ></p>
   );
 };
 

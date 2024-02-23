@@ -15,12 +15,6 @@ export enum FontWeight {
   Bold,
 }
 
-export enum FontFamily {
-  Poppins,
-  Inter,
-  Roboto,
-}
-
 interface useTextStatesTypes {
   visible: boolean;
   setVisible: () => void;
@@ -40,8 +34,8 @@ interface useTextStatesTypes {
   setTextAlign: (s: TextAlign) => void;
   textWeight: FontWeight;
   setTextWeight: (s: FontWeight) => void;
-  fontFamily: FontFamily;
-  setFontFamily: (s: FontFamily) => void;
+  fontFamily: string;
+  setFontFamily: (s: string) => void;
 }
 
 export const useTextStates = create<useTextStatesTypes>((set) => ({
@@ -63,6 +57,6 @@ export const useTextStates = create<useTextStatesTypes>((set) => ({
   setTextAlign: (s) => set({ textAlign: s }),
   textWeight: FontWeight.Regular,
   setTextWeight: (s) => set({ textWeight: s }),
-  fontFamily: FontFamily.Inter,
+  fontFamily: "Inter",
   setFontFamily: (s) => set({ fontFamily: s }),
 }));

@@ -99,4 +99,74 @@
   body {
     @apply bg-background text-foreground;
   }
+
+  @font-face {
+    font-family: "Akshar Unicode";
+    src: url("/fonts/Akshar Unicode.woff");
+  }
+
+  @font-face {
+    font-family: "Arya-Regular";
+    src: url("/fonts/Arya-Regular.woff") format("woff");
+  }
+
+  @font-face {
+    font-family: "Asar-Regular";
+    src: url("/fonts/Asar-Regular.woff") format("woff");
+  }
+
+  @font-face {
+    font-family: "Biryani-Regular";
+    src: url("/fonts/Biryani-Regular.woff") format("woff");
+  }
+
+  @font-face {
+    font-family: "Chandas";
+    src: url("/fonts/Chandas.woff") format("woff");
+  }
+
+  @font-face {
+    font-family: "Eczar-Regular";
+    src: url("/fonts/Eczar-Regular.woff") format("woff");
+  }
+
+  @font-face {
+    font-family: "Halant-Regular";
+    src: url("/fonts/Halant-Regular.woff") format("woff");
+  }
+
+  @font-face {
+    font-family: "Hind-Regular";
+    src: url("/fonts/Hind-Regular.woff") format("woff");
+  }
+
+  @font-face {
+    font-family: "Kalam-Regular";
+    src: url("/fonts/Kalam-Regular.woff") format("woff");
+  }
+
+  @font-face {
+    font-family: "Karma-Regular";
+    src: url("/fonts/Karma-Regular.woff") format("woff");
+  }
+
+  @font-face {
+    font-family: "Khand-Regular";
+    src: url("/fonts/Khand-Regular.woff") format("woff");
+  }
+
+  @font-face {
+    font-family: "Kokila";
+    src: url("/fonts/Kokila.woff") format("woff");
+  }
+
+  @font-face {
+    font-family: "Kurale-Regular";
+    src: url("/fonts/Kurale-Regular.woff") format("woff");
+  }
+
+  @font-face {
+    font-family: "Laila-Regular";
+    src: url("/fonts/Laila-Regular.woff") format("woff");
+  }
 }

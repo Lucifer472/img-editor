@@ -45,7 +45,7 @@ export const Property: React.FC<PropertyProps> = ({ label, children }) => {
       </CollapsibleTrigger>
       <CollapsibleContent
         className={
-          "px-4 py-8 bg-white border-b border-x border-border rounded-b-md w-full CollapsibleContent"
+          "px-4 py-4 bg-white border-b border-x border-border rounded-b-md w-full CollapsibleContent"
         }
       >
         {children}

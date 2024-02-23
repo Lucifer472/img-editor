@@ -5,10 +5,10 @@ import toast from "react-hot-toast";
 
 import { useWatermark } from "@/states/watermark-state";
 import { PropertySlider } from "@/components/sidebar-menus/property-slider";
+import { ImgUploadBtn } from "@/components/sidebar-menus/img-upload-btn";
+import { ColorCard } from "@/components/sidebar-menus/color-card";
 
 import { Switch } from "@/components/ui/switch";
-import { Label } from "@/components/ui/label";
-import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
 import { Separator } from "@/components/ui/separator";
 
@@ -148,39 +148,21 @@ export const LogoPropertiesContent = () => {
   ]);
 
   return (
-    <div className="w-full flex flex-col gap-y-8">
+    <div className="w-full flex flex-col gap-y-4">
       <div className="flex items-center justify-between w-full">
         <span className="text-muted-foreground">Visible</span>
         <Switch checked={visible} onClick={() => setVisible()} />
       </div>
       {visible && (
         <>
-          <input
-            type="file"
-            accept="image/*"
-            className="hidden"
+          <Separator className="w-full" />
+          <ImgUploadBtn
+            label="Click here to upload Logo"
             id="watermark"
-            disabled={isPending}
-            onChange={(e: any) => setFile(e.target.files?.[0])}
+            isPending={isPending}
+            setFile={setFile}
           />
-          <Label
-            htmlFor="watermark"
-            className="w-full min-h-32 bg-sky-100 cursor-pointer flex items-center justify-center text-muted-foreground rounded-md border-2 border-dashed border-sky-300"
-          >
-            Click Here to Upload Img
-          </Label>
-          <div className="flex items-center justify-between w-full">
-            <div className="flex flex-col items-start">
-              <span className="text-sm text-muted-foreground">Background</span>
-              <span className="text-sm text-muted-foreground">{bgColor}</span>
-            </div>
-            <Input
-              type="color"
-              value={bgColor}
-              onChange={(e) => setBgColor(e.target.value)}
-              className="flex border-input text-sm ring-offset-background file:border-0 file:bg-transparent file:text-sm file:font-medium placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-0 disabled:cursor-not-allowed [&::-webkit-color-swatch]:rounded-full [&::-moz-color-swatch]:rounded-full [&::-webkit-color-swatch]:border-0 [&::-moz-color-swatch]:border-0 [&::-webkit-color-swatch-wrapper]:p-0 rounded-full p-0 border-4 h-10 w-10 bg-white cursor-pointer disabled:opacity-50 disabled:pointer-events-none"
-            />
-          </div>
+          <ColorCard color={bgColor} label="Background" setColor={setBgColor} />
           <Button
             className="w-full"
             variant={"outline"}
@@ -189,20 +171,11 @@ export const LogoPropertiesContent = () => {
             Remove Bg
           </Button>
           <Separator className="w-full" />
-          <div className="flex items-center justify-between w-full">
-            <div className="flex flex-col items-start">
-              <span className="text-sm text-muted-foreground">
-                Border Color
-              </span>
-              <span className="text-sm text-muted-foreground">{bgColor}</span>
-            </div>
-            <Input
-              type="color"
-              value={borderColor}
-              onChange={(e) => setBorderColor(e.target.value)}
-              className="flex border-input text-sm ring-offset-background file:border-0 file:bg-transparent file:text-sm file:font-medium placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-0 disabled:cursor-not-allowed [&::-webkit-color-swatch]:rounded-full [&::-moz-color-swatch]:rounded-full [&::-webkit-color-swatch]:border-0 [&::-moz-color-swatch]:border-0 [&::-webkit-color-swatch-wrapper]:p-0 rounded-full p-0 border-4 h-10 w-10 bg-white cursor-pointer disabled:opacity-50 disabled:pointer-events-none"
-            />
-          </div>
+          <ColorCard
+            color={borderColor}
+            label="Border Color"
+            setColor={setBorderColor}
+          />
           <PropertySlider
             label="Roundness"
             max={100}
@@ -248,6 +221,7 @@ export const LogoPropertiesContent = () => {
               Bottom Right
             </Button>
           </div>
+          <Separator className="w-full" />
           <PropertySlider
             label="X Axis"
             max={1440}

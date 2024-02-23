@@ -6,6 +6,7 @@ import { Switch } from "@/components/ui/switch";
 import { Label } from "@/components/ui/label";
 import { Input } from "@/components/ui/input";
 import { Separator } from "@/components/ui/separator";
+
 import { PropertySlider } from "@/components/sidebar-menus/property-slider";
 import { ColorCard } from "@/components/sidebar-menus/color-card";
 
@@ -466,8 +467,9 @@ const Prop2 = () => {
 
 export const ExtraPropertiesContent = () => {
   return (
-    <div className="w-full flex flex-col gap-y-8">
+    <div className="w-full flex flex-col gap-y-4">
       <Prop1 />
+      <Separator className="w-full" />
       <Prop2 />
     </div>
   );

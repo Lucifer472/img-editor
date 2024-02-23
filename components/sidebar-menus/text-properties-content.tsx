@@ -16,13 +16,9 @@ import {
   SelectValue,
 } from "@/components/ui/select";
 
-import {
-  FontFamily,
-  FontWeight,
-  TextAlign,
-  useTextStates,
-} from "@/states/text-state";
+import { FontWeight, TextAlign, useTextStates } from "@/states/text-state";
 import { getLocalStorage, setLocalStorage } from "@/lib/storage";
+import { readLocalFonts } from "@/action/read-fonts";
 
 export const TextPropertiesContent = () => {
   const [
@@ -72,6 +68,7 @@ export const TextPropertiesContent = () => {
     start: number;
     end: number;
   } | null>(null);
+  const [fontFamilyArray, setFontFamilyArray] = useState<string[] | null>(null);
 
   useEffect(() => {
     const data = getLocalStorage("text");
@@ -90,6 +87,12 @@ export const TextPropertiesContent = () => {
       setTextAlign(dataObject.textAlign);
       setTop(dataObject.top);
     }
+  }, []);
+
+  useEffect(() => {
+    readLocalFonts().then((res: any) => {
+      setFontFamilyArray(res);
+    });
   }, []);
 
   const handleSetColor = () => {
@@ -126,9 +129,6 @@ export const TextPropertiesContent = () => {
   const fontWeightValues = Object.keys(FontWeight).filter(
     (key: any) => !isNaN(Number(FontWeight[key]))
   );
-  const fontFamilyValues = Object.keys(FontFamily).filter(
-    (key: any) => !isNaN(Number(FontFamily[key]))
-  );
 
   useEffect(() => {
     const data = JSON.stringify({
@@ -158,7 +158,7 @@ export const TextPropertiesContent = () => {
   ]);
 
   return (
-    <div className="w-full flex flex-col gap-y-6">
+    <div className="w-full flex flex-col gap-y-4">
       <div className="flex items-center justify-between w-full">
         <span className="text-muted-foreground">Visible</span>
         <Switch checked={visible} onClick={() => setVisible()} />
@@ -167,7 +167,7 @@ export const TextPropertiesContent = () => {
         <>
           <Separator className="w-full" />
           <Textarea
-            className="min-h-32"
+            className="min-h-16 resize-none"
             placeholder="Type Text here..."
             value={text}
             onChange={(e) => setText(e.target.value)}
@@ -213,7 +213,7 @@ export const TextPropertiesContent = () => {
             label="Top Down"
             max={1440}
             steps={10}
-            min={0}
+            min={-1440}
             setValue={setTop}
             value={top}
           />
@@ -257,18 +257,19 @@ export const TextPropertiesContent = () => {
           <div className="flex flex-col gap-y-1 w-full">
             <span>Font Family</span>
             <Select
-              defaultValue={fontFamily.toString()}
+              defaultValue={fontFamily}
               onValueChange={(e: any) => setFontFamily(e)}
             >
               <SelectTrigger className="w-full">
                 <SelectValue placeholder="Font Family" />
               </SelectTrigger>
               <SelectContent>
-                {fontFamilyValues.map((t, index) => (
-                  <SelectItem value={index.toString()} key={index}>
-                    {t}
-                  </SelectItem>
-                ))}
+                {fontFamilyArray &&
+                  fontFamilyArray.map((t, index) => (
+                    <SelectItem value={t} key={index}>
+                      {t}
+                    </SelectItem>
+                  ))}
               </SelectContent>
             </Select>
           </div>

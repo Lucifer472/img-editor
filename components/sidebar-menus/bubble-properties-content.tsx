@@ -8,10 +8,11 @@ import { useImgPositing } from "@/states/position-state";
 
 import { Switch } from "@/components/ui/switch";
 import { Separator } from "@/components/ui/separator";
-import { Input } from "@/components/ui/input";
-import { Label } from "@/components/ui/label";
 
+import { ImgUploadBtn } from "@/components/sidebar-menus/img-upload-btn";
+import { ColorCard } from "@/components/sidebar-menus/color-card";
 import { PropertySlider } from "@/components/sidebar-menus/property-slider";
+
 import { getLocalStorage, setLocalStorage } from "@/lib/storage";
 
 export const BubblePropertiesContent = () => {
@@ -119,13 +120,20 @@ export const BubblePropertiesContent = () => {
   }, [visible, size, roundness, borderWidth, borderColor, img, position]);
 
   return (
-    <div className="w-full flex flex-col gap-y-8">
+    <div className="w-full flex flex-col gap-y-4">
       <div className="flex items-center justify-between w-full">
         <span className="text-muted-foreground">Visible</span>
         <Switch checked={visible} onClick={() => setVisible()} />
       </div>
       {visible && (
         <>
+          <Separator className="w-full" />
+          <ImgUploadBtn
+            id="bubble-img"
+            isPending={isPending}
+            label="Upload Bubble Image here"
+            setFile={setFile}
+          />
           <Separator className="w-full" />
           <PropertySlider
             label="X Axis"
@@ -165,36 +173,12 @@ export const BubblePropertiesContent = () => {
             setValue={setBorderWidth}
             value={borderWidth}
           />
-          <div className="flex items-center justify-between w-full">
-            <div className="flex flex-col items-start">
-              <span className="text-sm font-medium">Border Color</span>
-              <span className="text-sm text-muted-foreground">
-                {borderColor}
-              </span>
-            </div>
-            <Input
-              type="color"
-              value={borderColor}
-              onChange={(e) => setBorderColor(e.target.value)}
-              className="rounded-full p-0 border-4 h-10 w-10 bg-white cursor-pointer disabled:pointer-events-none ring-offset-background [&::-webkit-color-swatch]:rounded-full
-        [&::-moz-color-swatch]:rounded-full [&::-webkit-color-swatch]:border-0
-        [&::-moz-color-swatch]:border-0 [&::-webkit-color-swatch-wrapper]:p-0"
-            />
-          </div>
-          <input
-            type="file"
-            accept="image/*"
-            className="hidden"
-            id="bubble-img"
-            disabled={isPending}
-            onChange={(e: any) => setFile(e.target.files?.[0])}
+          <Separator className="w-full" />
+          <ColorCard
+            color={borderColor}
+            label="Border Color"
+            setColor={setBorderColor}
           />
-          <Label
-            htmlFor="bubble-img"
-            className="w-full min-h-32 bg-sky-100 cursor-pointer flex items-center justify-center text-muted-foreground rounded-md border-2 border-dashed border-sky-300"
-          >
-            Click Here to Upload Img
-          </Label>
         </>
       )}
     </div>
