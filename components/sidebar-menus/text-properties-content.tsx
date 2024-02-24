@@ -19,6 +19,7 @@ import {
 import { FontWeight, TextAlign, useTextStates } from "@/states/text-state";
 import { getLocalStorage, setLocalStorage } from "@/lib/storage";
 import { readLocalFonts } from "@/action/read-fonts";
+import { OverlayPropertyContent } from "./overlay-properties-content";
 
 export const TextPropertiesContent = () => {
   const [
@@ -218,44 +219,25 @@ export const TextPropertiesContent = () => {
             value={top}
           />
           <Separator className="w-full" />
-          <div className="flex flex-col gap-y-1 w-full">
-            <span>Text Align</span>
-            <Select
-              defaultValue={textAlign.toString()}
-              onValueChange={(e: any) => setTextAlign(e)}
+          <div className="flex items-center justify-between w-full gap-2">
+            <Button
+              variant={"outline"}
+              size={"lg"}
+              className="w-full"
+              onClick={() => setTextAlign((textAlign + 1) % 3)}
             >
-              <SelectTrigger className="w-full">
-                <SelectValue placeholder="Text Align" />
-              </SelectTrigger>
-              <SelectContent>
-                {textAlignValues.map((t, index) => (
-                  <SelectItem value={index.toString()} key={index}>
-                    {t}
-                  </SelectItem>
-                ))}
-              </SelectContent>
-            </Select>
+              {textAlignValues[textAlign]}
+            </Button>
+            <Button
+              variant={"outline"}
+              size={"lg"}
+              className="w-full"
+              onClick={() => setFontWeight((fontWeight + 1) % 4)}
+            >
+              {fontWeightValues[fontWeight]}
+            </Button>
           </div>
           <div className="flex flex-col gap-y-1 w-full">
-            <span>Font Weight</span>
-            <Select
-              defaultValue={fontWeight.toString()}
-              onValueChange={(e: any) => setFontWeight(e)}
-            >
-              <SelectTrigger className="w-full">
-                <SelectValue placeholder="Font Weight" />
-              </SelectTrigger>
-              <SelectContent>
-                {fontWeightValues.map((t, index) => (
-                  <SelectItem value={index.toString()} key={index}>
-                    {t}
-                  </SelectItem>
-                ))}
-              </SelectContent>
-            </Select>
-          </div>
-          <div className="flex flex-col gap-y-1 w-full">
-            <span>Font Family</span>
             <Select
               defaultValue={fontFamily}
               onValueChange={(e: any) => setFontFamily(e)}
@@ -273,6 +255,8 @@ export const TextPropertiesContent = () => {
               </SelectContent>
             </Select>
           </div>
+          <Separator />
+          <OverlayPropertyContent />
         </>
       )}
     </div>

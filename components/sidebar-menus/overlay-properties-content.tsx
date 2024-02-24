@@ -57,7 +57,7 @@ export const OverlayPropertyContent = () => {
   }, [visible, solid, bgColor, height]);
 
   return (
-    <div className="w-full flex flex-col gap-y-2">
+    <div className="w-full flex flex-col gap-y-2 ">
       <div className="flex items-center justify-between w-full">
         <span className="text-muted-foreground">Visible</span>
         <Switch checked={visible} onClick={() => setVisible()} />

@@ -56,7 +56,7 @@ export const TextCanvas = () => {
   ]);
 
   const align = ["left", "center", "right"];
-  const weight = ["lighter", "normal", "bold", "bolder"];
+  const weight = [300, 500, 700, 900];
 
   return (
     <p

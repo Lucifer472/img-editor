@@ -1,6 +1,5 @@
 import { Property } from "@/components/sidebar-menus/properties-menu";
 import { ImgPropertyContent } from "@/components/sidebar-menus/img-properties-content";
-import { OverlayPropertyContent } from "@/components/sidebar-menus/overlay-properties-content";
 import { TextPropertiesContent } from "@/components/sidebar-menus/text-properties-content";
 import { BubblePropertiesContent } from "@/components/sidebar-menus/bubble-properties-content";
 import { LogoPropertiesContent } from "@/components/sidebar-menus/logo-properties-content";
@@ -18,9 +17,6 @@ export const Sidebar = () => {
       >
         <Property label="Image Properties">
           <ImgPropertyContent />
-        </Property>
-        <Property label="Overlay Properties">
-          <OverlayPropertyContent />
         </Property>
         <Property label="Text Properties">
           <TextPropertiesContent />
